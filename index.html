@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEAM Value Proposition – ICB Localiser</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <div class="brand-title">BEAM deck localiser</div>
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <label for="icbSelect">ICB</label>
+        <select id="icbSelect" aria-label="Select an ICB"></select>
+      </div>
+
+      <div class="control">
+        <label for="slideSelect">Slide</label>
+        <div class="slide-control">
+          <button id="prevSlide" class="btn" type="button" aria-label="Previous slide">◀</button>
+          <select id="slideSelect" aria-label="Select a slide"></select>
+          <button id="nextSlide" class="btn" type="button" aria-label="Next slide">▶</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" aria-live="polite">
+    <section id="slide1" class="slide" style="background-image:url('assets/slide1.png')"></section>
+
+    <section id="slide2" class="slide hidden" style="background-image:url('assets/slide2.png')">
+      <!-- Dynamic map -->
+      <div id="mapContainer" class="overlay map" style="--l:4.5%; --t:23.3333%; --w:52.5%; --h:68.0%;"></div>
+
+      <!-- Dynamic ICB name + example line -->
+      <div id="s2IcbName" class="overlay icb-name" style="--l:60.0%; --t:34.6667%; --w:33.0%; --h:5.3333%;"></div>
+      <div id="s2ExampleLine" class="overlay example-line" style="--l:4.5%; --t:89.3333%; --w:51.0%; --h:3.3333%;"></div>
+
+      <!-- Metric boxes -->
+      <div id="s2Referrals" class="overlay value-box" style="--l:60.0%; --t:46.2487%; --w:14.25%; --h:12.6667%;"></div>
+      <div id="s2Population" class="overlay value-box" style="--l:76.125%; --t:46.2487%; --w:14.25%; --h:12.6667%;"></div>
+      <div id="s2Recovery" class="overlay value-box" style="--l:60.0%; --t:63.3333%; --w:14.25%; --h:12.6667%;"></div>
+      <div id="s2Spend" class="overlay value-box" style="--l:76.125%; --t:63.3333%; --w:14.25%; --h:12.6667%;"></div>
+    </section>
+
+    <section id="slide3" class="slide hidden" style="background-image:url('assets/slide3.png')">
+      <!-- Challenge values -->
+      <div id="s3AnnualReferrals" class="overlay value-box" style="--l:4.4631%; --t:40.3733%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3Completed" class="overlay value-box" style="--l:4.4375%; --t:54.9605%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3MedianWait" class="overlay value-box" style="--l:4.7586%; --t:69.1685%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3Standards" class="overlay value-box small" style="--l:4.7586%; --t:80.6082%; --w:21.0738%; --h:6.7998%;"></div>
+
+      <!-- Adoption input (inside BEAM box) -->
+      <div class="overlay adoption-box" style="--l:37.8921%; --t:75.3333%; --w:14.25%; --h:12.6667%;">
+        <input id="adoptionInput" type="number" inputmode="decimal" min="0" max="100" step="1" aria-label="Percentage of patients initiated on BEAM" />
+        <div class="adoption-hint">Type % (e.g. 10)</div>
+      </div>
+
+      <!-- Illustrative impact values -->
+      <div id="s3Saving" class="overlay value-box" style="--l:69.1393%; --t:40.8667%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3ApptsFreed" class="overlay value-box" style="--l:69.1393%; --t:53.5337%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3Wte" class="overlay value-box" style="--l:69.1393%; --t:66.4548%; --w:21.0738%; --h:6.7998%;"></div>
+      <div id="s3WaitReduction" class="overlay value-box" style="--l:69.1393%; --t:79.2668%; --w:21.0738%; --h:6.7998%;"></div>
+    </section>
+
+    <section id="slide4" class="slide hidden" style="background-image:url('assets/slide4.png')"></section>
+
+    <section id="slide5" class="slide hidden" style="background-image:url('assets/slide5.png')">
+      <div id="s5Chart" class="overlay chart" style="--l:4.5%; --t:29.0667%; --w:61.5%; --h:61.3333%;"></div>
+
+      <!-- Fix label line-break to match PPT formatting (overlaying the baked PNG text) -->
+
+
+      <div id="s5Referrals" class="overlay value-box small" style="--l:86.8807%; --t:36.2091%; --w:7.6193%; --h:6.3818%;"></div>
+      <div id="s5Accessed" class="overlay value-box small" style="--l:86.8807%; --t:44.2848%; --w:7.6193%; --h:6.3818%;"></div>
+      <div id="s5Completed" class="overlay value-box small" style="--l:86.8807%; --t:51.9363%; --w:7.6193%; --h:6.3818%;"></div>
+      <div id="s5Sessions" class="overlay value-box small" style="--l:86.8807%; --t:60.0273%; --w:7.6193%; --h:6.3818%;"></div>
+      <div id="s5Recovery" class="overlay value-box small" style="--l:86.8807%; --t:68.103%; --w:7.6193%; --h:6.3818%;"></div>
+    </section>
+
+    <section id="slide6" class="slide hidden" style="background-image:url('assets/slide6.png')">
+      <!-- Dynamic sessions-per-course line chart (localised) -->
+      <div id="s6Chart" class="overlay chart" style="--l:4.5%; --t:29.7333%; --w:61.5%; --h:61.3333%;"></div>
+
+      <!-- Capacity demand (localised) -->
+      <div id="s6CompletedCourses" class="overlay s6-line" style="--l:69.375%; --t:38.4%; --w:25.875%; --h:3.7333%;"></div>
+      <div id="s6SessionsEach" class="overlay s6-line" style="--l:69.375%; --t:42.8%; --w:25.875%; --h:3.7333%;"></div>
+      <!-- Slightly higher to avoid overlapping the paragraph below on long values -->
+      <div id="s6TotalSessions" class="overlay s6-total" style="--l:69.375%; --t:53.35%; --w:25.875%; --h:6.6667%;"></div>
+    </section>
+    <section id="slide7" class="slide hidden" style="background-image:url('assets/slide7.png')">
+      <!-- Selected ICB median wait callout (overlay to replace static range) -->
+      <div id="s7WaitLabel" class="overlay s7-label" style="--l:69.375%; --t:31.6%; --w:24.2475%; --h:3.7333%;"></div>
+      <div id="s7WaitValue" class="overlay s7-value" style="--l:69.375%; --t:35.8667%; --w:24.2475%; --h:6.9333%;"></div>
+    </section>
+    <section id="slide8" class="slide hidden" style="background-image:url('assets/slide8.png')"></section>
+    <section id="slide9" class="slide hidden" style="background-image:url('assets/slide9.png')"></section>
+    <section id="slide10" class="slide hidden" style="background-image:url('assets/slide10.png')"></section>
+    <section id="slide11" class="slide hidden" style="background-image:url('assets/slide11.png')"></section>
+    <section id="slide12" class="slide hidden" style="background-image:url('assets/slide12.png')"></section>
+    <section id="slide13" class="slide hidden" style="background-image:url('assets/slide13.png')"></section>
+    <section id="slide14" class="slide hidden" style="background-image:url('assets/slide14.png')"></section>
+    <section id="slide15" class="slide hidden" style="background-image:url('assets/slide15.png')">
+            <!-- Slide 15 – populate the input/output boxes with selected ICB values -->
+      <div id="s15InReferrals" class="overlay s15-boxval" style="--l:33.2292%; --t:41.9907%; --w:14.5052%; --h:5.4630%;"></div>
+      <div id="s15InMedianWait" class="overlay s15-boxval" style="--l:33.2292%; --t:48.8889%; --w:14.5052%; --h:5.4167%;"></div>
+      <div id="s15InRecovery" class="overlay s15-boxval" style="--l:33.2292%; --t:55.4167%; --w:14.5052%; --h:5.4630%;"></div>
+      <div id="s15InUnitCost" class="overlay s15-boxval" style="--l:33.2292%; --t:62.4074%; --w:14.5052%; --h:5.4167%;"></div>
+      <div id="s15InSessions" class="overlay s15-boxval" style="--l:33.2292%; --t:69.4444%; --w:14.5052%; --h:5.4167%;"></div>
+      <div id="s15InAdoption" class="overlay s15-boxval" style="--l:33.2292%; --t:76.3889%; --w:14.5052%; --h:5.4167%;"></div>
+
+      <div id="s15OutSavings" class="overlay s15-boxval" style="--l:78.9844%; --t:39.1204%; --w:14.5313%; --h:5.4167%;"></div>
+      <div id="s15OutApptsWte" class="overlay s15-boxval" style="--l:78.9844%; --t:45.9722%; --w:14.5313%; --h:5.4630%;"></div>
+      <div id="s15OutWaitRed" class="overlay s15-boxval" style="--l:78.9844%; --t:52.5463%; --w:14.5313%; --h:5.4167%;"></div>
+      <div id="s15OutSwitchedBudget" class="overlay s15-boxval" style="--l:78.9844%; --t:59.4907%; --w:14.5313%; --h:7.6389%;"></div>
+    </section>
+    <section id="slide16" class="slide hidden" style="background-image:url('assets/slide16.png')"></section>
+
+    <div id="loading" class="loading">Loading ICB data…</div>
+  </main>
+
+  <script src="data/icb_data.js"></script>
+  <script src="data/icb_geo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

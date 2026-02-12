@@ -1,0 +1,344 @@
+:root{
+  --brand-blue: #141B8C;
+  --ink: #111827;
+  --muted: #6b7280;
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --border: #e5e7eb;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  user-select:none;
+}
+
+.brand-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--brand-blue);
+}
+
+.brand-title{
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.controls{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.control{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+label{
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+select{
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.slide-control{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.btn{
+  height: 34px;
+  width: 38px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  cursor:pointer;
+  font-weight: 800;
+}
+
+.btn:hover{ background:#f9fafb; }
+
+.stage{
+  padding: 18px;
+  display:flex;
+  justify-content:center;
+  position: relative;
+}
+
+.slide{
+  position: relative;
+  width: min(96vw, 1400px);
+  aspect-ratio: 16 / 9;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.14);
+  border-radius: 0; /* match PowerPoint */
+}
+
+.slide.hidden{ display:none; }
+
+.overlay{
+  position:absolute;
+  left: var(--l);
+  top: var(--t);
+  width: var(--w);
+  height: var(--h);
+}
+
+.value-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--brand-blue);
+  pointer-events:none;
+}
+
+.value-box.small{
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.icb-name{
+  display:flex;
+  align-items:center;
+  font-weight: 500;
+  font-size: 24px;
+  color: #111827;
+  padding: 0;
+  background: rgba(255,255,255,0.98);
+  pointer-events:none;
+}
+
+.example-line{
+  display:flex;
+  align-items:center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4b5563;
+  padding: 0;
+  background: rgba(234,235,241,0.98);
+  pointer-events:none;
+}
+
+.map, .chart{
+  pointer-events:auto;
+}
+
+.map svg, .chart svg{
+  width: 100%;
+  height: 100%;
+  display:block;
+}
+
+/* Slide 5 – snapshot label fix (split to two lines) */
+.s5-label{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.05;
+  color: #2B2E3B;
+  padding: 0 10px;
+  background: rgba(255,255,255,0.88);
+  pointer-events:none;
+}
+
+/* Map interactions */
+.icb-map path{
+  cursor: pointer;
+  transition: opacity 120ms ease;
+}
+
+.icb-map path:hover{
+  opacity: 0.85;
+}
+
+.icb-map path:focus{
+  outline: none;
+  opacity: 0.8;
+}
+
+.adoption-box{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px;
+}
+
+#adoptionInput{
+  width: 100%;
+  height: 70%;
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--brand-blue);
+  text-align: center;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+#adoptionInput::-webkit-outer-spin-button,
+#adoptionInput::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#adoptionInput{ -moz-appearance: textfield; }
+
+.adoption-hint{
+  font-size: 12px;
+  color: rgba(17,24,39,0.65);
+  font-weight: 600;
+}
+
+.loading{
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  background: rgba(243,244,246,0.65);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity 200ms ease;
+}
+
+/* Slide 6 – Capacity demand (right-hand box figures) */
+.s6-line{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+  padding: 0 10px;
+  background: rgba(255,255,255,0.98);
+  pointer-events:none;
+}
+
+.s6-total{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--brand-blue);
+  padding: 0 10px;
+  background: rgba(255,255,255,0.98);
+  pointer-events:none;
+  white-space: nowrap;
+  line-height: 1;
+  overflow: hidden;
+}
+
+/* Slide 7 – Selected ICB median wait callout */
+.s7-label{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  padding: 0 10px;
+  background: rgba(255,255,255,0.98);
+  pointer-events:none;
+}
+
+.s7-value{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 35px;
+  font-weight: 900;
+  color: var(--brand-blue);
+  padding: 0 10px;
+  background: rgba(255,255,255,0.98);
+  pointer-events:none;
+  white-space: nowrap;
+}
+
+/* Slide 15 – input/output boxes */
+.s15-boxval{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding: 0 14px;
+  background: transparent;
+  pointer-events:none;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.loading.show{
+  opacity: 1;
+  pointer-events:auto;
+}
+
+/* Small screens */
+@media (max-width: 860px){
+  .topbar{ align-items:flex-start; }
+  .controls{ width: 100%; justify-content:flex-end; }
+  .value-box{ font-size: 24px; }
+  .value-box.small{ font-size: 18px; }
+  .icb-name{ font-size: 18px; }
+  #adoptionInput{ font-size: 34px; }
+  .s6-line{ font-size: 16px; }
+  .s6-total{ font-size: 22px; }
+  .s7-label{ font-size: 14px; }
+  .s7-value{ font-size: 28px; }
+  .s15-boxval{ font-size: 16px; padding: 0 10px; }
+}
